@@ -63,6 +63,8 @@ flutter:
     - assets/macbook_mockup.png
     - assets/phone_mockup1.png
     - assets/phone_mockup2.png
+    - assets/AppStore_01.png
+    - assets/AppStore_02.png
     - assets/fonts/
     - assets/
 

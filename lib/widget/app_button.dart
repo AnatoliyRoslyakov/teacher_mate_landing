@@ -1,21 +1,28 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:teacher_mate_landing/theme/app_colors.dart';
 import 'package:teacher_mate_landing/theme/app_text_style.dart';
 
 class AppButton extends StatefulWidget {
   final String text;
   final VoidCallback? onPressed;
-  final bool isMainAction;
+  final bool invers;
   final bool small;
+  final bool expand;
+  final Widget? icon;
+  final Color? color;
 
   const AppButton({
     super.key,
     required this.text,
     this.onPressed,
-    this.isMainAction = true,
+    this.invers = false,
     this.small = false,
+    this.expand = true,
+    this.icon,
+    this.color,
   });
 
   @override
@@ -25,6 +32,8 @@ class AppButton extends StatefulWidget {
 class _AppButtonState extends State<AppButton>
     with SingleTickerProviderStateMixin {
   bool _isHovering = false;
+  Color? mainColor;
+  Color? strokeColor;
 
   void _handleHover(bool hovering) {
     if (mounted) {
@@ -33,11 +42,17 @@ class _AppButtonState extends State<AppButton>
   }
 
   @override
-  Widget build(BuildContext context) {
-    final mainColor = AppColors.pink.withOpacity(0.2);
-    final strokeColor = widget.isMainAction ? Colors.white : AppColors.pink;
+  void initState() {
+    mainColor = AppColors.pink.withOpacity(0.2);
+    strokeColor =
+        widget.color ?? (widget.invers ? AppColors.pink : Colors.white);
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return MouseRegion(
+      cursor: SystemMouseCursors.click,
       onEnter: (_) => _handleHover(true),
       onExit: (_) => _handleHover(false),
       child: GestureDetector(
@@ -45,6 +60,10 @@ class _AppButtonState extends State<AppButton>
         child:
         // Основная кнопка
         Container(
+          constraints: BoxConstraints(
+            minWidth: widget.expand ? double.infinity : 0,
+          ),
+
           padding: EdgeInsets.symmetric(
             horizontal: widget.small ? 16 : 32,
             vertical: widget.small ? 8 : 16,
@@ -52,13 +71,19 @@ class _AppButtonState extends State<AppButton>
           decoration: BoxDecoration(
             color: _isHovering ? mainColor : Colors.transparent,
             borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: strokeColor, width: 1.5),
+            border: Border.all(color: strokeColor ?? Colors.black, width: 1.5),
           ),
           child: FittedBox(
             fit: BoxFit.scaleDown,
-            child: Text(
-              widget.text,
-              style: AppTextStyle.b4f16.copyWith(color: strokeColor),
+            child: Row(
+              children: [
+                if (widget.icon != null) ...[widget.icon!, SizedBox(width: 5)],
+
+                Text(
+                  widget.text,
+                  style: AppTextStyle.b4f16.copyWith(color: strokeColor),
+                ),
+              ],
             ),
           ),
         ),
