@@ -9,6 +9,9 @@ import 'package:teacher_mate_landing/theme/app_colors.dart';
 import 'package:teacher_mate_landing/theme/app_text_style.dart';
 import 'package:teacher_mate_landing/widget/app_bar.dart';
 import 'package:teacher_mate_landing/widget/app_button.dart';
+import 'package:teacher_mate_landing/widget/buttons_group.dart';
+import 'package:teacher_mate_landing/widget/feature_card.dart';
+import 'package:teacher_mate_landing/widget/phone_mockup.dart';
 import 'package:teacher_mate_landing/widget/title_info.dart';
 
 void main() => runApp(const TeacherMateApp());
@@ -73,123 +76,132 @@ class _TeacherMateLandingState extends State<TeacherMateLanding> {
         controller: _scrollController,
         child: Stack(
           children: [
-            Positioned.fill(
-              top: 100,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 60),
-                child: PhoneMockupWidget(scrollPosition: scrollPosition),
-              ),
-            ),
-
+            PhoneMockupWidget(scrollPosition: scrollPosition),
             Column(
               children: [
-                SizedBox(
-                  height: screenSize.height * 0.9,
-                  child: Stack(
-                    children: [
-                      Positioned.fill(
-                        child: AnimatedOpacity(
-                          opacity: opacity,
-                          duration: const Duration(milliseconds: 300),
-                          child: Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.vertical(
-                                bottom: Radius.circular(100),
-                              ),
-                              gradient: LinearGradient(
-                                begin: Alignment.centerLeft,
-                                end: Alignment.bottomCenter,
-                                colors: [
-                                  Colors.transparent,
+                FirstSection(
+                  screenSize: screenSize,
+                  opacity: opacity,
+                  scrollPosition: scrollPosition,
+                ),
+                SecondSection(
+                  isSmallScreen: isSmallScreen,
+                  scrollPosition: scrollPosition,
+                ),
 
-                                  Color.fromARGB(63, 255, 0, 238),
-                                ],
-                              ),
+                // Device Showcase Section
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 60),
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          height: screenSize.height * 0.8,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.horizontal(
+                              left: Radius.circular(100),
                             ),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: SizedBox(
-                                width: screenSize.width / 2,
-                                child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(right: 60),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        TitleInfoWidget(
-                                          scrollPosition: scrollPosition,
-                                          opacity: opacity,
-                                        ),
-                                        SizedBox(height: 60),
-                                        SizedBox(
-                                          width: 400,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            spacing: 10,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                  right: 0,
-                                                ),
-                                                child: AppButton(
-                                                  color: Colors.black,
-                                                  invers: true,
-                                                  text:
-                                                      'Поиск Учеников/Репетиторов',
-                                                  onPressed: () {},
-                                                  icon: Icon(
-                                                    Icons.telegram,
-                                                    color: Colors.blue,
-                                                  ),
-                                                ),
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Flexible(
-                                                    child: AppButton(
-                                                      color: Colors.black,
-                                                      invers: true,
-                                                      text: 'Android',
-                                                      onPressed: () {},
-                                                      icon: Icon(
-                                                        Icons.android,
-                                                        color: Colors.green,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(width: 10),
-                                                  Flexible(
-                                                    child: AppButton(
-                                                      color: Colors.black,
-                                                      invers: true,
-                                                      text: 'Apple',
-                                                      onPressed: () {},
-                                                      icon: Icon(
-                                                        Icons.apple,
-                                                        color: Colors.black,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                AppColors.mainColor.withOpacity(0.4),
+                                AppColors.mainColor.withOpacity(0.1),
+                              ],
+                            ),
+                          ),
+                          child: Center(
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 150,
+                                  child: FittedBox(
+                                    fit: BoxFit.fitWidth,
+
+                                    child: Text(
+                                      'Я УЧЕНИК',
+                                      style: AppTextStyle.b7f46.copyWith(
+                                        fontSize: 300,
+                                        color: AppColors.pink.withOpacity(0.2),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
+                                AnimatedContainer(
+                                  duration: const Duration(milliseconds: 500),
+                                  transform: Matrix4.translationValues(
+                                    0,
+                                    (-scrollPosition + 2000) * 0.2,
+                                    0,
+                                  ),
+                                  child: Image.asset(
+                                    Jpgs.phoneMocup2,
+                                    height: isSmallScreen ? 300 : 500,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          height: screenSize.height * 0.8,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.horizontal(
+                              right: Radius.circular(100),
+                            ),
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                AppColors.pink.withOpacity(0.4),
+                                AppColors.pink.withOpacity(0.1),
+                              ],
+                            ),
+                          ),
+                          child: Center(
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 150,
+                                  child: FittedBox(
+                                    fit: BoxFit.fitWidth,
+                                    child: Text(
+                                      'Я УЧИТЕЛЬ',
+                                      style: AppTextStyle.b7f46.copyWith(
+                                        fontSize: 300,
+                                        color: AppColors.mainColor.withOpacity(
+                                          0.1,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
+                                AnimatedContainer(
+                                  duration: const Duration(milliseconds: 500),
+                                  transform: Matrix4.translationValues(
+                                    0,
+                                    (-scrollPosition + 2000) * 0.2,
+                                    0,
+                                  ),
+                                  child: Stack(
+                                    children: [
+                                      Image.asset(
+                                        Jpgs.phoneMocup2,
+                                        height: isSmallScreen ? 300 : 500,
+                                      ),
+                                      Image.asset(
+                                        Jpgs.phoneMocup1,
+                                        height: isSmallScreen ? 300 : 500,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -197,107 +209,7 @@ class _TeacherMateLandingState extends State<TeacherMateLanding> {
                     ],
                   ),
                 ),
-                // Features Section
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 80,
-                    horizontal: isSmallScreen ? 20 : 100,
-                  ),
-                  color: Colors.white,
-                  child: Column(
-                    children: [
-                      const Text(
-                        'Key Features',
-                        style: TextStyle(
-                          fontSize: 36,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 40),
-                      Wrap(
-                        spacing: 40,
-                        runSpacing: 40,
-                        alignment: WrapAlignment.center,
-                        children: [
-                          _FeatureCard(
-                            icon: Icons.calendar_today,
-                            title: 'Intuitive Scheduling',
-                            description:
-                                'Easily manage your lessons with a clean, visual calendar interface.',
-                            scrollPosition: scrollPosition,
-                            index: 0,
-                          ),
-                          _FeatureCard(
-                            icon: Icons.notifications,
-                            title: 'Automated Reminders',
-                            description:
-                                'Never miss a lesson with automatic reminders for you and your students.',
-                            scrollPosition: scrollPosition,
-                            index: 1,
-                          ),
-                          _FeatureCard(
-                            icon: Icons.payment,
-                            title: 'Payment Tracking',
-                            description:
-                                'Keep track of payments and invoices in one place.',
-                            scrollPosition: scrollPosition,
-                            index: 2,
-                          ),
-                          _FeatureCard(
-                            icon: Icons.analytics,
-                            title: 'Progress Reports',
-                            description:
-                                'Generate reports to track student progress over time.',
-                            scrollPosition: scrollPosition,
-                            index: 3,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                // Device Showcase Section
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 80),
-                  color: Colors.blue.shade50,
-                  child: Column(
-                    children: [
-                      AnimatedContainer(
-                        duration: const Duration(milliseconds: 500),
-                        transform: Matrix4.translationValues(
-                          0,
-                          -scrollPosition * 0.1,
-                          0,
-                        ),
-                        child: Image.asset(
-                          Jpgs.macbookMockup1,
-                          height: isSmallScreen ? 300 : 500,
-                        ),
-                      ),
-                      const SizedBox(height: 40),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Text(
-                          'Seamless Experience Across All Devices',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 36,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Text(
-                          'Access your schedule and student information from your phone, tablet, or computer.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 20, color: Colors.grey),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+
                 // CTA Section
                 Container(
                   padding: EdgeInsets.symmetric(
@@ -386,23 +298,6 @@ class _TeacherMateLandingState extends State<TeacherMateLanding> {
                 ),
               ],
             ),
-            // Positioned.fill(
-            //   top: screenSize.height * 0.5,
-            //   right: 30,
-            //   child: Align(
-            //     alignment: Alignment.topRight,
-            //     child: Column(
-            //       // mainAxisAlignment: MainAxisAlignment.end,
-            //       spacing: 10,
-            //       children: [
-            //         AppButton(text: 'Text Button', onPressed: () {}),
-            //         AppButton(text: 'Text Button', onPressed: () {}),
-            //         AppButton(text: 'Text Button', onPressed: () {}),
-            //         AppButton(text: 'Text Button', onPressed: () {}),
-            //       ],
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       ),
@@ -410,70 +305,101 @@ class _TeacherMateLandingState extends State<TeacherMateLanding> {
   }
 }
 
-class PhoneMockupWidget extends StatelessWidget {
-  const PhoneMockupWidget({super.key, required this.scrollPosition});
+class SecondSection extends StatelessWidget {
+  const SecondSection({
+    super.key,
+    required this.isSmallScreen,
+    required this.scrollPosition,
+  });
 
+  final bool isSmallScreen;
   final double scrollPosition;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 600, //1000
-      child: Stack(
+    return Container(
+      padding: EdgeInsets.symmetric(
+        vertical: 80,
+        horizontal: isSmallScreen ? 20 : 100,
+      ),
+      color: Colors.white,
+      child: Column(
         children: [
-          Positioned(
-            top: 50,
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: AnimatedContainer(
-                width: 350,
-                duration: const Duration(milliseconds: 500),
-                transform: Matrix4.translationValues(
-                  0,
-                  -scrollPosition * 0.1,
-                  0,
-                ),
-                child: ShaderMask(
-                  shaderCallback: (bounds) {
-                    return const LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [Colors.black, Colors.black, Colors.transparent],
-                      stops: [0.0, 0.5, 0.7],
-                    ).createShader(bounds);
-                  },
-                  blendMode: BlendMode.dstIn,
-                  child: Image.asset(Jpgs.phoneMocup2, fit: BoxFit.cover),
-                ),
-              ),
-            ),
+          Text(
+            'Основные возможности',
+            style: AppTextStyle.b7f46.copyWith(fontSize: 36),
           ),
-          Positioned(
-            left: 200,
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: AnimatedContainer(
-                width: 400,
-                duration: const Duration(milliseconds: 300),
-                transform: Matrix4.translationValues(
-                  0,
-                  -scrollPosition * 0.3,
-                  0,
-                ),
-                child: ShaderMask(
-                  shaderCallback: (bounds) {
-                    return const LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [Colors.black, Colors.black, Colors.transparent],
-                      stops: [0.0, 0.5, 0.7],
-                    ).createShader(bounds);
-                  },
-                  blendMode: BlendMode.dstIn,
-                  child: Image.asset(Jpgs.phoneMocup1, fit: BoxFit.cover),
-                ),
+          const SizedBox(height: 40),
+          Wrap(
+            spacing: 40,
+            runSpacing: 40,
+            alignment: WrapAlignment.center,
+            children: [
+              FeatureCard(
+                icon: Icons.calendar_month,
+                title: 'Удобное расписание',
+                description:
+                    'Планируйте уроки в интуитивном календаре с цветовой маркировкой и гибкими настройками.',
+                scrollPosition: scrollPosition,
+                index: 0,
               ),
-            ),
+              FeatureCard(
+                icon: Icons.group,
+                title: 'Управление учениками',
+                description:
+                    'Ведите базу учеников с контактами, заметками и историей занятий в одном месте.',
+                scrollPosition: scrollPosition,
+                index: 1,
+              ),
+              FeatureCard(
+                icon: Icons.search,
+                title: 'Поиск новых учеников',
+                description:
+                    'Подключайтесь к сообществу репетиторов и находите новых учеников без комиссий.',
+                scrollPosition: scrollPosition,
+                index: 2,
+              ),
+              FeatureCard(
+                icon: Icons.money_off,
+                title: 'Бесплатно и без подписок',
+                description:
+                    'Полный функционал без скрытых платежей — работайте комфортно и без лишних затрат.',
+                scrollPosition: scrollPosition,
+                index: 3,
+              ),
+              FeatureCard(
+                icon: Icons.notifications_active,
+                title: 'Автоматические напоминания',
+                description:
+                    'Уведомления для вас и учеников о предстоящих уроках — никаких пропущенных занятий!',
+                scrollPosition: scrollPosition,
+                index: 4,
+              ),
+              FeatureCard(
+                icon: Icons.note_alt,
+                title: 'Заметки к урокам',
+                description:
+                    'Записывайте прогресс учеников и планы следующих занятий прямо в приложении.',
+                scrollPosition: scrollPosition,
+                index: 5,
+              ),
+              FeatureCard(
+                icon: Icons.design_services,
+                title: 'Простота и удобство',
+                description:
+                    'Минималистичный дизайн без лишних кнопок — только то, что нужно для работы.',
+                scrollPosition: scrollPosition,
+                index: 6,
+              ),
+              FeatureCard(
+                icon: Icons.phone_android,
+                title: 'Доступ с любого устройства',
+                description:
+                    'Работайте с телефона или компьютера — ваши данные всегда синхронизированы.',
+                scrollPosition: scrollPosition,
+                index: 7,
+              ),
+            ],
           ),
         ],
       ),
@@ -481,131 +407,71 @@ class PhoneMockupWidget extends StatelessWidget {
   }
 }
 
-class _FeatureCard extends StatefulWidget {
-  final IconData icon;
-  final String title;
-  final String description;
-  final double scrollPosition;
-  final int index;
-
-  const _FeatureCard({
-    required this.icon,
-    required this.title,
-    required this.description,
+class FirstSection extends StatelessWidget {
+  const FirstSection({
+    super.key,
+    required this.screenSize,
+    required this.opacity,
     required this.scrollPosition,
-    required this.index,
   });
 
-  @override
-  State<_FeatureCard> createState() => _FeatureCardState();
-}
-
-class _FeatureCardState extends State<_FeatureCard>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _animation;
-  bool _isHovering = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 500),
-    );
-    _animation = Tween<double>(
-      begin: 0,
-      end: 1,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
-  }
-
-  @override
-  void didUpdateWidget(covariant _FeatureCard oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    // Trigger animation when the card comes into view
-    if (widget.scrollPosition > 300 + widget.index * 100 - 200) {
-      _controller.forward();
-    } else {
-      _controller.reset();
-    }
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+  final Size screenSize;
+  final double opacity;
+  final double scrollPosition;
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) => setState(() => _isHovering = true),
-      onExit: (_) => setState(() => _isHovering = false),
-      child: AnimatedBuilder(
-        animation: _animation,
-        builder: (context, child) {
-          return Transform.translate(
-            offset: Offset(0, 50 * (1 - _animation.value)),
-            child: Opacity(opacity: _animation.value, child: child),
-          );
-        },
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          width: 300,
-          padding: const EdgeInsets.all(24),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow:
-                _isHovering
-                    ? [
-                      BoxShadow(
-                        color: Colors.blue.withOpacity(0.2),
-                        blurRadius: 20,
-                        spreadRadius: 2,
-                        offset: const Offset(0, 10),
-                      ),
-                    ]
-                    : [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        blurRadius: 10,
-                        spreadRadius: 1,
-                        offset: const Offset(0, 5),
-                      ),
+    return SizedBox(
+      height: screenSize.height * 0.9,
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: AnimatedOpacity(
+              opacity: opacity,
+              duration: const Duration(milliseconds: 300),
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.vertical(
+                    bottom: Radius.circular(100),
+                  ),
+                  gradient: LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.transparent,
+
+                      Color.fromARGB(63, 255, 0, 238),
                     ],
-            border: Border.all(
-              color:
-                  _isHovering
-                      ? Theme.of(context).colorScheme.primary.withOpacity(0.3)
-                      : Colors.grey.shade200,
-              width: 1,
-            ),
-          ),
-          child: Column(
-            children: [
-              Icon(
-                widget.icon,
-                size: 48,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              const SizedBox(height: 20),
-              Text(
-                widget.title,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                  ),
+                ),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: SizedBox(
+                    width: screenSize.width / 2,
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 60),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            TitleInfoWidget(
+                              scrollPosition: scrollPosition,
+                              opacity: opacity,
+                            ),
+                            SizedBox(height: 60),
+                            ButtonsGroupWidget(),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
-              const SizedBox(height: 10),
-              Text(
-                widget.description,
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Colors.grey.shade600),
-              ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
