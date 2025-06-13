@@ -23,7 +23,7 @@ class AppMaterial extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      locale: Locale('ru'),
+      locale: Locale(context.watch<LandingBloc>().state.locale),
       localizationsDelegates: [
         S.delegate,
         GlobalMaterialLocalizations.delegate,

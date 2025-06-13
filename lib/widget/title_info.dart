@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teacher_mate_landing/generated/l10n.dart';
 import 'package:teacher_mate_landing/theme/app_colors.dart';
 import 'package:teacher_mate_landing/theme/app_text_style.dart';
 
@@ -27,7 +28,7 @@ class TitleInfoWidget extends StatelessWidget {
             opacity: opacity,
             duration: const Duration(milliseconds: 300),
             child: Text(
-              'Полный контроль над занятиями и потоком учеников',
+              S.of(context).appTitle,
               textAlign: TextAlign.left,
 
               style: AppTextStyle.b7f46.copyWith(

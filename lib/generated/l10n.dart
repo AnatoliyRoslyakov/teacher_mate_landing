@@ -58,6 +58,16 @@ class S {
   String get test {
     return Intl.message('test', name: 'test', desc: '', args: []);
   }
+
+  /// `Full control over classes and student flow`
+  String get appTitle {
+    return Intl.message(
+      'Full control over classes and student flow',
+      name: 'appTitle',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

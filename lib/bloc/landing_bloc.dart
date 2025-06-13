@@ -6,7 +6,7 @@ sealed class LandingEvent {
   const LandingEvent();
 
   const factory LandingEvent.init() = LandingInitEvent;
-  const factory LandingEvent.locale(String locale) = LandingLocaleEvent;
+  const factory LandingEvent.locale() = LandingLocaleEvent;
 }
 
 class LandingInitEvent extends LandingEvent {
@@ -14,8 +14,7 @@ class LandingInitEvent extends LandingEvent {
 }
 
 class LandingLocaleEvent extends LandingEvent {
-  final String locale;
-  const LandingLocaleEvent(this.locale);
+  const LandingLocaleEvent();
 }
 
 class LandingState {
@@ -46,6 +45,6 @@ class LandingBloc extends Bloc<LandingEvent, LandingState> {
     LandingLocaleEvent event,
     Emitter<LandingState> emitter,
   ) async {
-    emitter(state.copyWith(locale: event.locale));
+    emitter(state.copyWith(locale: state.locale == 'en' ? 'ru' : 'en'));
   }
 }
