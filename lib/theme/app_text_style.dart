@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:teacher_mate_landing/theme/app_colors.dart';
 
 class AppTextStyle {
-  static TextStyle get _baseFonts => const TextStyle(fontFamily: 'Roboto');
+  static TextStyle get _baseFonts => const TextStyle(fontFamily: 'Jost');
   static TextStyle get _logoFonts =>
       const TextStyle(fontFamily: 'DancingScript');
 
   static TextStyle get b7f46 => _baseFonts.copyWith(
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w500,
     fontSize: 46,
     color: Colors.black87,
-    height: 0,
+    height: 0.9,
   );
 
   static TextStyle get b7f32pink => _logoFonts.copyWith(

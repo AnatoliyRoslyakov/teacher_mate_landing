@@ -27,10 +27,13 @@ class TitleInfoWidget extends StatelessWidget {
             opacity: opacity,
             duration: const Duration(milliseconds: 300),
             child: Text(
-              'Полный контроль над уроками\nи потоком учеников',
-              textAlign: TextAlign.center,
+              'Полный контроль над занятиями и потоком учеников',
+              textAlign: TextAlign.left,
 
-              style: AppTextStyle.b7f46,
+              style: AppTextStyle.b7f46.copyWith(
+                color: AppColors.mainColor,
+                fontSize: 65,
+              ),
             ),
           ),
           const SizedBox(height: 60),

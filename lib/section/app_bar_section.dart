@@ -7,8 +7,8 @@ import 'package:teacher_mate_landing/theme/app_colors.dart';
 import 'package:teacher_mate_landing/theme/app_text_style.dart';
 import 'package:teacher_mate_landing/widget/app_button.dart';
 
-class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
-  const AppBarWidget({
+class AppBarSection extends StatelessWidget implements PreferredSizeWidget {
+  const AppBarSection({
     super.key,
     required this.opacity,
     required this.blurIntensity,

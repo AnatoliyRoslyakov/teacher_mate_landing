@@ -42,7 +42,7 @@ class PhoneMockupWidget extends StatelessWidget {
                         ).createShader(bounds);
                       },
                       blendMode: BlendMode.dstIn,
-                      child: Image.asset(Jpgs.phoneMocup2, fit: BoxFit.cover),
+                      child: Image.asset(Pngs.phoneMocup2, fit: BoxFit.cover),
                     ),
                   ),
                 ),
@@ -73,7 +73,7 @@ class PhoneMockupWidget extends StatelessWidget {
                         ).createShader(bounds);
                       },
                       blendMode: BlendMode.dstIn,
-                      child: Image.asset(Jpgs.phoneMocup1, fit: BoxFit.cover),
+                      child: Image.asset(Pngs.phoneMocup1, fit: BoxFit.cover),
                     ),
                   ),
                 ),

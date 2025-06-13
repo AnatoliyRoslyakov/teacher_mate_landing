@@ -13,6 +13,8 @@ class AppButton extends StatefulWidget {
   final bool expand;
   final Widget? icon;
   final Color? color;
+  final bool border;
+  final Color? bgColor;
 
   const AppButton({
     super.key,
@@ -23,6 +25,8 @@ class AppButton extends StatefulWidget {
     this.expand = true,
     this.icon,
     this.color,
+    this.border = true,
+    this.bgColor,
   });
 
   @override
@@ -43,9 +47,13 @@ class _AppButtonState extends State<AppButton>
 
   @override
   void initState() {
-    mainColor = AppColors.pink.withOpacity(0.2);
+    mainColor =
+        widget.bgColor == AppColors.pink
+            ? AppColors.mainColor.withOpacity(0.2)
+            : AppColors.pink.withOpacity(0.2);
     strokeColor =
-        widget.color ?? (widget.invers ? AppColors.pink : Colors.white);
+        widget.color ??
+        (widget.invers ? widget.bgColor ?? AppColors.pink : Colors.white);
     super.initState();
   }
 
@@ -69,9 +77,15 @@ class _AppButtonState extends State<AppButton>
             vertical: widget.small ? 8 : 16,
           ),
           decoration: BoxDecoration(
-            color: _isHovering ? mainColor : Colors.transparent,
+            color:
+                _isHovering
+                    ? mainColor
+                    : widget.bgColor?.withOpacity(0.2) ?? Colors.transparent,
             borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: strokeColor ?? Colors.black, width: 1.5),
+            border:
+                widget.border
+                    ? Border.all(color: strokeColor!, width: 1)
+                    : null,
           ),
           child: FittedBox(
             fit: BoxFit.scaleDown,
