@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:teacher_mate_landing/resource/jpgs.dart';
 import 'package:teacher_mate_landing/section/bottom_bar_section.dart';
@@ -44,11 +46,8 @@ class _TeacherMateLandingState extends State<TeacherMateLanding> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    final isSmallScreen = AppLayoutItemBuilder(
-      wide: () => false,
-      narrow: () => true,
-    ).call(context);
 
+    log(screenSize.width.toString());
     return Scaffold(
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
@@ -57,7 +56,11 @@ class _TeacherMateLandingState extends State<TeacherMateLanding> {
         controller: _scrollController,
         child: Stack(
           children: [
-            PhoneMockupWidget(scrollPosition: scrollPosition),
+            AppLayoutItemBuilder(
+              wide: () => PhoneMockupWidget(scrollPosition: scrollPosition),
+              narrow: () => SizedBox.shrink(),
+            ).call(context),
+
             Column(
               children: [
                 FirstSection(
@@ -65,10 +68,7 @@ class _TeacherMateLandingState extends State<TeacherMateLanding> {
                   opacity: opacity,
                   scrollPosition: scrollPosition,
                 ),
-                SecondSection(
-                  isSmallScreen: isSmallScreen,
-                  scrollPosition: scrollPosition,
-                ),
+                SecondSection(scrollPosition: scrollPosition),
                 ThreeSection(
                   screenSize: screenSize,
                   scrollPosition: scrollPosition,

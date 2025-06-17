@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:teacher_mate_landing/generated/l10n.dart';
 import 'package:teacher_mate_landing/resource/jpgs.dart';
+import 'package:teacher_mate_landing/shared/app_layout_item_builder.dart';
 import 'package:teacher_mate_landing/theme/app_colors.dart';
 import 'package:teacher_mate_landing/theme/app_text_style.dart';
 import 'package:teacher_mate_landing/widget/app_button.dart';
@@ -17,17 +19,21 @@ class ThreeSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isSmall = AppLayoutItemBuilder(
+      wide: () => false,
+      narrow: () => true,
+    ).call(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 60),
+      padding: EdgeInsets.symmetric(horizontal: isSmall ? 0 : 60),
       child: Row(
         children: [
           Flexible(
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: isSmall ? 10 : 20),
               height: screenSize.height * 0.8,
               decoration: BoxDecoration(
-                borderRadius: const BorderRadius.horizontal(
-                  left: Radius.circular(100),
+                borderRadius: BorderRadius.horizontal(
+                  left: Radius.circular(isSmall ? 30 : 100),
                 ),
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
@@ -39,7 +45,7 @@ class ThreeSection extends StatelessWidget {
                 ),
               ),
               child: TeacherStudentContent(
-                title: 'Я УЧЕНИК',
+                title: S.of(context).threeSectionStudent,
                 titleStyle: AppTextStyle.b7f46.copyWith(
                   fontSize: 300,
                   color: AppColors.pink.withOpacity(0.2),
@@ -48,48 +54,70 @@ class ThreeSection extends StatelessWidget {
                 image: Pngs.student,
                 imageOnLeft: true,
                 children: [
-                  const _TextSection(
+                  _TextSection(
                     color: AppColors.pink,
-                    text:
-                        'Быстрый поиск репетитора — пиши, что нужно, и получай отклики',
+                    text: S.of(context).threeSectionStudentMessage,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: AppButton(
-                          small: true,
-                          bgColor: AppColors.mainColor,
-                          border: false,
-                          color: AppColors.mainColor,
-                          text: 'Telegram группа',
-                          onPressed: () {},
-                        ),
+                  isSmall
+                      ? Column(
+                        spacing: 10,
+                        children: [
+                          AppButton(
+                            small: true,
+                            bgColor: AppColors.mainColor,
+                            border: false,
+                            color: AppColors.mainColor,
+                            text: S.of(context).tgButton,
+                            onPressed: () {},
+                          ),
+
+                          AppButton(
+                            small: true,
+                            bgColor: AppColors.mainColor,
+                            color: AppColors.mainColor,
+                            text: S.of(context).vkButton,
+                            onPressed: () {},
+                            border: false,
+                          ),
+                        ],
+                      )
+                      : Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            child: AppButton(
+                              small: true,
+                              bgColor: AppColors.mainColor,
+                              border: false,
+                              color: AppColors.mainColor,
+                              text: S.of(context).tgButton,
+                              onPressed: () {},
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Flexible(
+                            child: AppButton(
+                              small: true,
+                              bgColor: AppColors.mainColor,
+                              color: AppColors.mainColor,
+                              text: S.of(context).vkButton,
+                              onPressed: () {},
+                              border: false,
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(width: 10),
-                      Flexible(
-                        child: AppButton(
-                          small: true,
-                          bgColor: AppColors.mainColor,
-                          color: AppColors.mainColor,
-                          text: 'VK группа',
-                          onPressed: () {},
-                          border: false,
-                        ),
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),
           ),
           Flexible(
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: isSmall ? 10 : 20),
               height: screenSize.height * 0.8,
               decoration: BoxDecoration(
-                borderRadius: const BorderRadius.horizontal(
-                  right: Radius.circular(100),
+                borderRadius: BorderRadius.horizontal(
+                  right: Radius.circular(isSmall ? 30 : 100),
                 ),
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
@@ -101,7 +129,7 @@ class ThreeSection extends StatelessWidget {
                 ),
               ),
               child: TeacherStudentContent(
-                title: 'Я УЧИТЕЛЬ',
+                title: S.of(context).threeSectionTeacher,
                 titleStyle: AppTextStyle.b7f46.copyWith(
                   fontSize: 300,
                   color: AppColors.mainColor.withOpacity(0.1),
@@ -110,72 +138,118 @@ class ThreeSection extends StatelessWidget {
                 image: Pngs.teacher,
                 imageOnLeft: false,
                 children: [
-                  const _TextSection(
+                  _TextSection(
                     color: AppColors.mainColor,
                     size: 30,
-                    text:
-                        'Удобное ведение занятий — расписание, оплата и ученики в одном месте',
+                    text: S.of(context).threeSectionTeacherMessage,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: AppButton(
-                          small: true,
-                          bgColor: AppColors.pink,
-                          color: AppColors.pink,
-                          text: 'Android',
-                          onPressed: () {},
-                          icon: Icon(Icons.android, color: AppColors.pink),
-                          border: false,
-                        ),
+                  isSmall
+                      ? Column(
+                        spacing: 10,
+                        children: [
+                          AppButton(
+                            small: true,
+                            bgColor: AppColors.pink,
+                            color: AppColors.pink,
+                            text: 'Android',
+                            onPressed: () {},
+                            icon: Icon(Icons.android, color: AppColors.pink),
+                            border: false,
+                          ),
+
+                          AppButton(
+                            small: true,
+                            color: AppColors.pink,
+                            bgColor: AppColors.pink,
+                            text: 'Apple',
+                            onPressed: () {},
+                            icon: Icon(Icons.apple, color: AppColors.pink),
+                            border: false,
+                          ),
+                        ],
+                      )
+                      : Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            child: AppButton(
+                              small: true,
+                              bgColor: AppColors.pink,
+                              color: AppColors.pink,
+                              text: 'Android',
+                              onPressed: () {},
+                              icon: Icon(Icons.android, color: AppColors.pink),
+                              border: false,
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Flexible(
+                            child: AppButton(
+                              small: true,
+                              color: AppColors.pink,
+                              bgColor: AppColors.pink,
+                              text: 'Apple',
+                              onPressed: () {},
+                              icon: Icon(Icons.apple, color: AppColors.pink),
+                              border: false,
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(width: 10),
-                      Flexible(
-                        child: AppButton(
-                          small: true,
-                          color: AppColors.pink,
-                          bgColor: AppColors.pink,
-                          text: 'Apple',
-                          onPressed: () {},
-                          icon: Icon(Icons.apple, color: AppColors.pink),
-                          border: false,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const _TextSection(
+                  _TextSection(
                     color: AppColors.mainColor,
                     size: 30,
-                    text:
-                        'Поток новых учеников — заявки из ВК и Telegram без посредников',
+                    text: S.of(context).threeSectionTeacherMessageTwo,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: AppButton(
-                          small: true,
-                          bgColor: AppColors.pink,
-                          border: false,
-                          color: AppColors.pink,
-                          text: 'Telegram группа',
-                          onPressed: () {},
-                        ),
+                  isSmall
+                      ? Column(
+                        spacing: 10,
+                        children: [
+                          AppButton(
+                            small: true,
+                            bgColor: AppColors.pink,
+                            border: false,
+                            color: AppColors.pink,
+                            text: S.of(context).tgButton,
+                            onPressed: () {},
+                          ),
+
+                          AppButton(
+                            small: true,
+                            bgColor: AppColors.pink,
+                            color: AppColors.pink,
+                            text: S.of(context).vkButton,
+                            onPressed: () {},
+                            border: false,
+                          ),
+                        ],
+                      )
+                      : Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            child: AppButton(
+                              small: true,
+                              bgColor: AppColors.pink,
+                              border: false,
+                              color: AppColors.pink,
+                              text: S.of(context).tgButton,
+                              onPressed: () {},
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Flexible(
+                            child: AppButton(
+                              small: true,
+                              bgColor: AppColors.pink,
+                              color: AppColors.pink,
+                              text: S.of(context).vkButton,
+                              onPressed: () {},
+                              border: false,
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(width: 10),
-                      Flexible(
-                        child: AppButton(
-                          small: true,
-                          bgColor: AppColors.pink,
-                          color: AppColors.pink,
-                          text: 'VK группа',
-                          onPressed: () {},
-                          border: false,
-                        ),
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),
@@ -199,6 +273,10 @@ class _TextSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isSmall = AppLayoutItemBuilder(
+      wide: () => false,
+      narrow: () => true,
+    ).call(context);
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -208,7 +286,7 @@ class _TextSection extends StatelessWidget {
             style: AppTextStyle.b7f46.copyWith(
               color: color.withOpacity(0.8),
               height: 1,
-              fontSize: size,
+              fontSize: isSmall ? 22 : size,
             ),
           ),
         ),

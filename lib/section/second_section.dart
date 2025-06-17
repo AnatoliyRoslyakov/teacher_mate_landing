@@ -1,29 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:teacher_mate_landing/generated/l10n.dart';
+import 'package:teacher_mate_landing/shared/app_layout_item_builder.dart';
 import 'package:teacher_mate_landing/theme/app_text_style.dart';
 import 'package:teacher_mate_landing/widget/feature_card.dart';
 
 class SecondSection extends StatelessWidget {
-  const SecondSection({
-    super.key,
-    required this.isSmallScreen,
-    required this.scrollPosition,
-  });
+  const SecondSection({super.key, required this.scrollPosition});
 
-  final bool isSmallScreen;
   final double scrollPosition;
 
   @override
   Widget build(BuildContext context) {
+    bool isSmall = AppLayoutItemBuilder(
+      wide: () => false,
+      narrow: () => true,
+    ).call(context);
     return Container(
-      padding: EdgeInsets.symmetric(
-        vertical: 80,
-        horizontal: isSmallScreen ? 20 : 100,
-      ),
+      padding:
+          isSmall
+              ? EdgeInsets.symmetric(vertical: 20, horizontal: 16)
+              : EdgeInsets.symmetric(vertical: 80, horizontal: 100),
       color: Colors.white,
       child: Column(
         children: [
           Text(
-            'Основные возможности',
+            S.of(context).secondSectionTitle,
+            textAlign: TextAlign.center,
             style: AppTextStyle.b7f46.copyWith(fontSize: 36),
           ),
           const SizedBox(height: 40),
@@ -34,65 +36,57 @@ class SecondSection extends StatelessWidget {
             children: [
               FeatureCard(
                 icon: Icons.calendar_month,
-                title: 'Удобное расписание',
-                description:
-                    'Планируйте уроки в интуитивном календаре с цветовой маркировкой и гибкими настройками.',
+                title: S.of(context).secondSectionTitle1,
+                description: S.of(context).secondSectionSubtitle1,
                 scrollPosition: scrollPosition,
                 index: 0,
               ),
               FeatureCard(
                 icon: Icons.group,
-                title: 'Управление учениками',
-                description:
-                    'Ведите базу учеников с контактами, заметками и историей занятий в одном месте.',
+                title: S.of(context).secondSectionTitle2,
+                description: S.of(context).secondSectionSubtitle2,
                 scrollPosition: scrollPosition,
                 index: 1,
               ),
               FeatureCard(
                 icon: Icons.search,
-                title: 'Поиск новых учеников',
-                description:
-                    'Подключайтесь к сообществу репетиторов и находите новых учеников без комиссий.',
+                title: S.of(context).secondSectionTitle3,
+                description: S.of(context).secondSectionSubtitle3,
                 scrollPosition: scrollPosition,
                 index: 2,
               ),
               FeatureCard(
                 icon: Icons.money_off,
-                title: 'Бесплатно и без подписок',
-                description:
-                    'Полный функционал без скрытых платежей — работайте комфортно и без лишних затрат.',
+                title: S.of(context).secondSectionTitle4,
+                description: S.of(context).secondSectionSubtitle4,
                 scrollPosition: scrollPosition,
                 index: 3,
               ),
               FeatureCard(
                 icon: Icons.notifications_active,
-                title: 'Автоматические напоминания',
-                description:
-                    'Уведомления для вас и учеников о предстоящих уроках — никаких пропущенных занятий!',
+                title: S.of(context).secondSectionTitle5,
+                description: S.of(context).secondSectionSubtitle5,
                 scrollPosition: scrollPosition,
                 index: 4,
               ),
               FeatureCard(
                 icon: Icons.note_alt,
-                title: 'Заметки к урокам',
-                description:
-                    'Записывайте прогресс учеников и планы следующих занятий прямо в приложении.',
+                title: S.of(context).secondSectionTitle6,
+                description: S.of(context).secondSectionSubtitle6,
                 scrollPosition: scrollPosition,
                 index: 5,
               ),
               FeatureCard(
                 icon: Icons.design_services,
-                title: 'Простота и удобство',
-                description:
-                    'Минималистичный дизайн без лишних кнопок — только то, что нужно для работы.',
+                title: S.of(context).secondSectionTitle7,
+                description: S.of(context).secondSectionSubtitle7,
                 scrollPosition: scrollPosition,
                 index: 6,
               ),
               FeatureCard(
                 icon: Icons.phone_android,
-                title: 'Доступ с любого устройства',
-                description:
-                    'Работайте с телефона или компьютера — ваши данные всегда синхронизированы.',
+                title: S.of(context).secondSectionTitle8,
+                description: S.of(context).secondSectionSubtitle8,
                 scrollPosition: scrollPosition,
                 index: 7,
               ),

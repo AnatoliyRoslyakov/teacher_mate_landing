@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:teacher_mate_landing/generated/l10n.dart';
 import 'package:teacher_mate_landing/resource/svgs.dart';
 
 class BottomBarSection extends StatelessWidget {
@@ -33,8 +34,8 @@ class BottomBarSection extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 20),
-          const Text(
-            '© 2025 TeacherMate. Все права защищены.',
+          Text(
+            S.of(context).bottomBarEmergensy,
             style: TextStyle(color: Colors.white54),
           ),
           const SizedBox(height: 20),

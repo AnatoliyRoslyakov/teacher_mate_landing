@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teacher_mate_landing/shared/app_layout_item_builder.dart';
 
 class TeacherStudentContent extends StatelessWidget {
   const TeacherStudentContent({
@@ -19,11 +20,15 @@ class TeacherStudentContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isSmall = AppLayoutItemBuilder(
+      wide: () => false,
+      narrow: () => true,
+    ).call(context);
     return Center(
       child: Column(
         children: [
           SizedBox(
-            height: 150,
+            height: isSmall ? 60 : 150,
             child: FittedBox(
               fit: BoxFit.fitWidth,
               child: Text(title, style: titleStyle),
@@ -34,7 +39,7 @@ class TeacherStudentContent extends StatelessWidget {
               duration: const Duration(milliseconds: 500),
               transform: Matrix4.translationValues(
                 0,
-                (-scrollPosition + 2500) * 0.2,
+                (-scrollPosition + (isSmall ? 3300 : 2500)) * 0.2,
                 0,
               ),
               child: Row(
@@ -42,7 +47,7 @@ class TeacherStudentContent extends StatelessWidget {
                 children:
                     imageOnLeft
                         ? [
-                          Image.asset(image, height: 300),
+                          if (!isSmall) Image.asset(image, height: 300),
                           Flexible(
                             child: Column(spacing: 20, children: children),
                           ),
@@ -51,7 +56,7 @@ class TeacherStudentContent extends StatelessWidget {
                           Flexible(
                             child: Column(spacing: 20, children: children),
                           ),
-                          Image.asset(image, height: 500),
+                          if (!isSmall) Image.asset(image, height: 500),
                         ],
               ),
             ),

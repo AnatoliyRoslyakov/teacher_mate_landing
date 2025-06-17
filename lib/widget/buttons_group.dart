@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teacher_mate_landing/generated/l10n.dart';
 import 'package:teacher_mate_landing/theme/app_colors.dart';
 import 'package:teacher_mate_landing/theme/app_text_style.dart';
 import 'package:teacher_mate_landing/widget/app_button.dart';
@@ -17,7 +18,7 @@ class ButtonsGroupWidget extends StatelessWidget {
         spacing: 10,
         children: [
           Text(
-            'Поиск Учеников/Репетиторов:',
+            S.of(context).buttonGroupTitle,
             style: AppTextStyle.b3f16.copyWith(color: AppColors.mainColor),
           ),
           Row(
@@ -28,7 +29,7 @@ class ButtonsGroupWidget extends StatelessWidget {
                   bgColor: AppColors.mainColor,
                   border: false,
                   color: AppColors.mainColor,
-                  text: 'Telegram группа',
+                  text: S.of(context).tgButton,
                   onPressed: () {},
 
                   // border: false,
@@ -39,7 +40,7 @@ class ButtonsGroupWidget extends StatelessWidget {
                 child: AppButton(
                   bgColor: AppColors.mainColor,
                   color: AppColors.mainColor,
-                  text: 'VK группа',
+                  text: S.of(context).vkButton,
                   onPressed: () {},
                   border: false,
                   // border: false,
@@ -48,7 +49,7 @@ class ButtonsGroupWidget extends StatelessWidget {
             ],
           ),
           Text(
-            'Приложение для ведения уроков:',
+            S.of(context).buttonAppsTitle,
             style: AppTextStyle.b3f16.copyWith(color: AppColors.mainColor),
           ),
 
